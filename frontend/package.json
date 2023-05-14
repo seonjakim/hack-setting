@@ -21,6 +21,9 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@types/node": "20.1.4",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
     "@near-wallet-selector/core": "^7.8.0",
     "@near-wallet-selector/ledger": "^7.8.0",
     "@near-wallet-selector/math-wallet": "^7.8.0",
@@ -35,7 +38,9 @@
     "near-api-js": "^1.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "regenerator-runtime": "^0.13.11"
+    "react-router-dom": "^6.11.1",
+    "regenerator-runtime": "^0.13.11",
+    "typescript": "5.0.4"
   },
   "resolutions": {
     "@babel/preset-env": "7.13.8"
