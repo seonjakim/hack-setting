@@ -22,21 +22,21 @@
 //   );
 // }
 
-import React from 'react'
-import { initContract } from './utils'
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home'
+import React from "react";
+import { initContract } from "./utils";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 
-const root = createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById("root"));
 window.nearInitPromise = initContract()
-.then(() => {
+  .then(() => {
     root.render(
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     );
   })
-  .catch(console.error)
+  .catch(console.error);

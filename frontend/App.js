@@ -1,18 +1,18 @@
-import 'regenerator-runtime/runtime';
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route } from 'react-router-dom';
-import Home from './pages/Home'
+import "regenerator-runtime/runtime";
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
-import './assets/global.css';
+import "./assets/global.css";
 
-import { EducationalText, SignInPrompt, SignOutButton } from './ui-components';
+import { EducationalText, SignInPrompt, SignOutButton } from "./ui-components";
 
-const root = createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById("root"));
 root.render(
-<BrowserRouter>
-  <Route path="/" element={<Home />} />
-</BrowserRouter>
+  <BrowserRouter>
+    <Route path="/" element={<Home />} />
+  </BrowserRouter>
 );
 
 export default function App({ isSignedIn, contractId, wallet }) {
@@ -41,7 +41,7 @@ export default function App({ isSignedIn, contractId, wallet }) {
   //   e.preventDefault();
   //   setUiPleaseWait(true);
   //   const { greetingInput } = e.target.elements;
-    
+
   //   // use the wallet to send the greeting to the contract
   //   wallet.callMethod({ method: 'set_greeting', args: { message: greetingInput.value }, contractId })
   //     .then(async () => {return getGreeting();})
@@ -58,7 +58,7 @@ export default function App({ isSignedIn, contractId, wallet }) {
 
   return (
     <>
-    hello
+      hello
       {/* <SignOutButton accountId={wallet.accountId} onClick={() => wallet.signOut()}/>
       <main className={uiPleaseWait ? 'please-wait' : ''}>
         <h1>
