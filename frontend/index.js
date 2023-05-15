@@ -27,6 +27,7 @@ import { initContract } from "./utils";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import Event from "./pages/Event";
 
 const root = createRoot(document.getElementById("root"));
 window.nearInitPromise = initContract()
@@ -35,6 +36,7 @@ window.nearInitPromise = initContract()
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/event" element={<Event />} />
         </Routes>
       </BrowserRouter>
     );
