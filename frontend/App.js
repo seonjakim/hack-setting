@@ -3,7 +3,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./pages/Home";
-
+import Layout from "./components/Layout";
 import "./assets/global.css";
 
 import { EducationalText, SignInPrompt, SignOutButton } from "./ui-components";
@@ -57,7 +57,7 @@ export default function App({ isSignedIn, contractId, wallet }) {
   // }
 
   return (
-    <>
+    <Layout>
       hello
       {/* <SignOutButton accountId={wallet.accountId} onClick={() => wallet.signOut()}/>
       <main className={uiPleaseWait ? 'please-wait' : ''}>
@@ -80,6 +80,6 @@ export default function App({ isSignedIn, contractId, wallet }) {
         </form>
         <EducationalText/>
       </main> */}
-    </>
+    </Layout>
   );
 }

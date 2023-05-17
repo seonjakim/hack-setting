@@ -28,16 +28,19 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Event from "./pages/Event";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const root = createRoot(document.getElementById("root"));
 window.nearInitPromise = initContract()
   .then(() => {
     root.render(
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/event" element={<Event />} />
-        </Routes>
+        <ChakraProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/event" element={<Event />} />
+          </Routes>
+        </ChakraProvider>
       </BrowserRouter>
     );
   })

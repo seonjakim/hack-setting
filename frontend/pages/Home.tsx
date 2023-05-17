@@ -1,5 +1,7 @@
+import Layout from "../components/Layout";
+
 const Home = () => {
-  return <div>home</div>;
+  return <Layout buttonText="포토카드 받기">home</Layout>;
 };
 
 export default Home;
