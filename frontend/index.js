@@ -29,6 +29,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Event from "./pages/Event";
 import { ChakraProvider } from "@chakra-ui/react";
+import App from "./App";
 
 const root = createRoot(document.getElementById("root"));
 window.nearInitPromise = initContract()
@@ -37,7 +38,7 @@ window.nearInitPromise = initContract()
       <BrowserRouter>
         <ChakraProvider>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<App />} />
             <Route path="/event" element={<Event />} />
           </Routes>
         </ChakraProvider>
