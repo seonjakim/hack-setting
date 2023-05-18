@@ -14,7 +14,10 @@
     "postinstall": "cd frontend && npm install && cd .. && cd integration-tests && npm install && cd .. && cd contract && npm install"
   },
   "devDependencies": {
-    "near-cli": "^3.3.0"
-  },
-  "dependencies": {}
+    "eslint": "^8.40.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "near-cli": "^3.3.0",
+    "prettier": "2.8.8"
+  }
 }

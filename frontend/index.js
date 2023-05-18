@@ -22,21 +22,39 @@
 //   );
 // }
 
-import React from 'react'
-import { initContract } from './utils'
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home'
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Event from "./pages/Event";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Contract } from "./near-interface";
+import { Wallet } from "./near-wallet";
 
-const root = createRoot(document.getElementById('root'));
-window.nearInitPromise = initContract()
-.then(() => {
-    root.render(
+const wallet = new Wallet({
+  createAccessKeyFor: "nft-frontend-simple-mint.blockhead.testnet",
+});
+
+// Abstract the logic of interacting with the contract to simplify your project
+const contract = new Contract({
+  contractId: "nft-frontend-simple-mint.blockhead.testnet",
+  walletToUse: wallet,
+});
+
+const root = createRoot(document.getElementById("root"));
+window.onload = async () => {
+  const isSignedIn = await wallet.startUp();
+  root.render(
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <ChakraProvider>
+        <Routes>
+          <Route
+            path="/"
+            element={<Home isSignedIn={isSignedIn} wallet={wallet} />}
+          />
+          <Route path="/event" element={<Event />} />
+        </Routes>
+      </ChakraProvider>
     </BrowserRouter>
-    );
-  })
-  .catch(console.error)
+  );
+};
