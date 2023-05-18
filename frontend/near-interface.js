@@ -43,9 +43,9 @@ export class Contract {
 
   async mintNFT() {
     const options = {
-      token_id: `${this.contractId}-go-ahead-1`,
+      token_id: `${this.wallet.accountId}-test`,
       metadata: {
-        title: "please",
+        title: "working",
         description: "Tplease work",
         media:
           "https://bafybeiftczwrtyr3k7a2k4vutd3amkwsmaqyhrdzlhvpt33dyjivufqusq.ipfs.dweb.link/goteam-gif.gif",
