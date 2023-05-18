@@ -43,20 +43,23 @@ export class Contract {
 
   async mintNFT() {
     const options = {
-      token_id: `${this.accountId}-go-team-hehe`,
+      token_id: `${this.contractId}-go-ahead-1`,
       metadata: {
         title: "please",
         description: "Tplease work",
         media:
           "https://bafybeiftczwrtyr3k7a2k4vutd3amkwsmaqyhrdzlhvpt33dyjivufqusq.ipfs.dweb.link/goteam-gif.gif",
       },
-      receiver_id: this.accountId,
+      receiver_id: this.wallet.accountId,
     };
     // let deposit = utils.format.parseNearAmount(amount.toString());
+    let deposit = utils.format.parseNearAmount("1");
+
     let response = await this.wallet.callMethod({
       contractId: this.contractId,
       method: "nft_mint",
       args: options,
+      deposit,
     });
     return response;
   }

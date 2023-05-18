@@ -31,7 +31,7 @@ const { networkId } = getConfig(process.env.NODE_ENV || "development");
 
 export default function App() {
   const [userHasNFT, setuserHasNFT] = useState(false);
-
+  console.log("hehe", wallet);
   // useEffect(() => {
   //   const receivedNFT = async () => {
   //     console.log(
