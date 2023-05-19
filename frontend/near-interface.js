@@ -35,30 +35,44 @@ export class Contract {
 
     return donations;
   }
+  async nftToken({ token_id }) {
+    const tokenId = await this.wallet.viewMethod({
+      contractId: this.contractId,
+      method: "nft_token",
+      args: {
+        token_id,
+      },
+    });
+    console.log(tokenId);
+    return tokenId;
+  }
+  async nftTokensForOwner({ accountId, fromIndex, limit }) {
+    const nftTokens = await this.wallet.viewMethod({
+      contractId: this.contractId,
+      method: "nft_tokens_for_owner",
+      args: {
+        account_id: accountId,
+        from_index: fromIndex,
+        limit,
+      },
+    });
+    console.log("tokens", nftTokens);
+    return nftTokens;
+  }
 
   async getDonationFromTransaction(txhash) {
     let donation_amount = await this.wallet.getTransactionResult(txhash);
     return utils.format.formatNearAmount(donation_amount);
   }
 
-  async mintNFT() {
-    const options = {
-      token_id: `${this.wallet.accountId}-test`,
-      metadata: {
-        title: "working",
-        description: "Tplease work",
-        media:
-          "https://bafybeiftczwrtyr3k7a2k4vutd3amkwsmaqyhrdzlhvpt33dyjivufqusq.ipfs.dweb.link/goteam-gif.gif",
-      },
-      receiver_id: this.wallet.accountId,
-    };
+  async mintNFT({ token_id, metadata, receiver_id }) {
     // let deposit = utils.format.parseNearAmount(amount.toString());
     let deposit = utils.format.parseNearAmount("1");
 
     let response = await this.wallet.callMethod({
       contractId: this.contractId,
       method: "nft_mint",
-      args: options,
+      args: { token_id, metadata, receiver_id },
       deposit,
     });
     return response;

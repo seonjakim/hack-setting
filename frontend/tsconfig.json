@@ -29,7 +29,10 @@
     "types",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "near-wallet.js",
+    "pages/Home.js",
+    "constants/index.js"
   ],
   "exclude": ["node_modules"]
 }

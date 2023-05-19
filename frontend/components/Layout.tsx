@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { Dispatch, Fragment, ReactNode, SetStateAction } from "react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import HamburgerIcon from "../assets/menu.svg";
 import ListIcon from "../assets/list.svg";
@@ -7,20 +7,34 @@ type Props = {
   children: ReactNode;
   type?: string;
   buttonText?: string;
+  buttonClickEvent: Dispatch<SetStateAction<unknown>>;
 };
-const Layout = ({ type = "default", children, buttonText }: Props) => {
+const Layout = ({
+  type = "default",
+  children,
+  buttonText,
+  buttonClickEvent,
+}: Props) => {
   return (
     <div>
-      <Flex justifyContent="space-between" alignItems="center">
-        {/* <HamburgerIcon /> */}
-        <Button padding="32px 24px" backgroundColor="transparent">
-          <img src={HamburgerIcon} alt="menu" />
-        </Button>
-        <span>collection</span>
-        <Button padding="32px 24px" backgroundColor="transparent">
-          <img src={ListIcon} alt="list" />
-        </Button>
-      </Flex>
+      <Box height="56px">
+        <Flex
+          position="fixed"
+          width="100%"
+          justifyContent="space-between"
+          alignItems="center"
+          backgroundColor="#fff"
+        >
+          {/* <HamburgerIcon /> */}
+          <Button padding="32px 24px" backgroundColor="transparent">
+            <img src={HamburgerIcon} alt="menu" />
+          </Button>
+          <span>collection</span>
+          <Button padding="32px 24px" backgroundColor="transparent">
+            <img src={ListIcon} alt="list" />
+          </Button>
+        </Flex>
+      </Box>
       <Box padding=" 16px">{children}</Box>
       {buttonText && (
         <Button
@@ -33,6 +47,7 @@ const Layout = ({ type = "default", children, buttonText }: Props) => {
           backgroundColor="#1B1B1B"
           color="white"
           height="60px"
+          onClick={buttonClickEvent}
         >
           {buttonText}
         </Button>
