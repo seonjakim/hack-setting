@@ -1,7 +1,6 @@
 import { Dispatch, Fragment, ReactNode, SetStateAction, useState } from "react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import HamburgerIcon from "../assets/menu-white.svg";
-import ListIcon from "../assets/list.svg";
 import BookOpenIcon from "../assets/book-open.svg";
 import GiftIcon from "../assets/gift.svg";
 import UsersWhiteIcon from "../assets/users-white.svg";
@@ -86,7 +85,7 @@ const Layout = ({ children }) => {
   };
   return (
     <div>
-      <Box height="56px">
+      <Box height="60px">
         <Flex
           position="fixed"
           width="100%"

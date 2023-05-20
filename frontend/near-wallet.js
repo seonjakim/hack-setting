@@ -2,6 +2,7 @@
 
 // near api js
 import { providers } from "near-api-js";
+console.log(providers);
 
 // wallet selector UI
 import "@near-wallet-selector/modal-ui/styles.css";

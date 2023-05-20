@@ -1,14 +1,12 @@
 import Layout from "../components/Layout";
-import { Button } from "@chakra-ui/react";
+import { Button, Image, Flex, Box } from "@chakra-ui/react";
 import { cards } from "../constants/index";
-import { Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-
-import { Box } from "@chakra-ui/react";
 import { useEffect } from "react";
+
 const Home = () => {
   const navigate = useNavigate();
-  const tokenId = `${window.wallet.accountId}-minji`;
+  const tokenId = `${window.wallet.accountId}-butter`;
 
   const directToGallery = async () => {
     const createdToken = await window.contract.nftToken({
@@ -27,27 +25,66 @@ const Home = () => {
     metadata: {
       title: "Happy B-day Minji",
       description: "Thank you for visiting",
-      media: cards.minji,
+      media: cards.butter,
     },
     receiver_id: window.wallet.accountId,
   };
 
-  const phtoCardMint = async () => {
+  const photoCardMint = async () => {
     const mintRes = await window.contract.mintNFT(nftMetadata);
     console.log("mintRes", mintRes);
   };
   if (!window.isSignedIn) {
     return (
-      <div>
-        <Button onClick={() => window.wallet.signIn()}>로그인하기</Button>
-      </div>
+      <Flex
+        flexDirection="column"
+        padding="0 24px"
+        gap="60px"
+        alignItems="center"
+        justifyContent="center"
+        height="100vh"
+      >
+        <Box width="100%" filter="blur(8px)">
+          <Image width="100%" src={cards.butter} alt="Minji Birthday" />
+        </Box>
+        <Button
+          backgroundColor="#121212"
+          color="white"
+          width="100%"
+          height="60px"
+          borderRadius="60px"
+          fontSize="16px"
+          fontWeight="700"
+          onClick={() => window.wallet.signIn()}
+        >
+          월렛 연결하기
+        </Button>
+      </Flex>
     );
   }
   return (
-    <Layout buttonText="포토카드 받기" buttonClickEvent={phtoCardMint}>
-      {`반가워요! ${window.wallet.accountId}`}
-      <Image width="100%" src={cards.minji} alt="Minji Birthday" />
-    </Layout>
+    <Flex
+      flexDirection="column"
+      padding="0 24px"
+      gap="60px"
+      alignItems="center"
+      justifyContent="center"
+      height="100vh"
+    >
+      <Image width="100%" src={cards.butter} alt="Minji Birthday" />
+      <Button
+        backgroundColor="#121212"
+        color="white"
+        width="100%"
+        height="60px"
+        borderRadius="60px"
+        fontSize="16px"
+        fontWeight="700"
+        onClick={photoCardMint}
+      >
+        포토카드 받기
+      </Button>
+    </Flex>
   );
 };
 
