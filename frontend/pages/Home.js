@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
-  const tokenId = `${window.wallet.accountId}-${new Date()}`;
+  const tokenId = `${window.wallet.accountId}-1`;
 
   const directToGallery = async () => {
     const createdToken = await window.contract.nftToken({
