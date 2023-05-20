@@ -42,7 +42,7 @@ window.onload = async () => {
   window.contract = contract;
   window.isSignedIn = isSignedIn;
   root.render(
-    <BrowserRouter basename="https://seonjakim.github.io/pokatika/">
+    <BrowserRouter>
       <ChakraProvider theme={theme}>
         <Routes>
           <Route path="/" element={<Home />} />
