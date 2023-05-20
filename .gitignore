@@ -32,5 +32,4 @@ yarn-error.log*
 
 **/neardev
 **/build
-**/dist
 **/.parcel-cache
