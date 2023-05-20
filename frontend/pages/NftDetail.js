@@ -21,7 +21,6 @@ const NftDetail = () => {
   useEffect(() => {
     getNftDetail(0);
   }, []);
-  console.log("nftInfo", nftInfo);
   const mockData = {
     eventTitle: "new jeans debut 100 days",
     date: "23.05.25 - 23.05.31",
@@ -32,29 +31,27 @@ const NftDetail = () => {
     <Layout buttonText="목록으로 돌아가기">
       <Box
         display="grid"
-        gap="16px"
+        gap="24px"
         borderBottom="4px dotted #eee"
-        paddingBottom="24px"
+        padding="0 24px 24px 24px"
+        justifyContent="center"
+        width="100%"
       >
-        <Heading as="h1" size="lg">
+        <Heading as="h1" fontSize="34px" fontWeight="800">
           {mockData.eventTitle.toUpperCase()}
           <br />
-          {nftInfo && `#${nftInfo.owner_id}$`}
+          {nftInfo && `@Crytotraveler`}
         </Heading>
-        {nftInfo ? (
-          <Image
-            width="100%"
-            src={nftInfo.metadata.media}
-            alt={nftInfo.metadata.title}
-          />
-        ) : (
-          <Skeleton width="100%" aspectRatio="1/1.4" borderRadius="12px" />
-        )}
+        <Image
+          width="100%"
+          src={nftInfo.metadata.media}
+          alt={nftInfo.metadata.title}
+        />
       </Box>
-      <Box color="#CDCDCD" fontSize="15px" paddingTop="24px">
+      <Box color="#CDCDCD" fontSize="15px" padding="24px">
         <Flex gap="8px">
           <img src={UserIcon} alt="user" />
-          {`Owned by @${nftInfo.owner_id}`}
+          {`Owned by @Crytotraveler`}
         </Flex>
         <Flex gap="8px">
           <img src={CalendarIcon} alt="calendar" />

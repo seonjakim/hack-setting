@@ -1,13 +1,3 @@
-// // React
-// import { createRoot } from 'react-dom/client';
-// import App from './App';
-
-// // NEAR
-// import { Wallet } from './near-wallet';
-
-// const CONTRACT_ADDRESS = process.env.CONTRACT_NAME
-
-// // When creating the wallet you can optionally ask to create an access key
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -28,6 +18,23 @@ const contract = new Contract({
   walletToUse: wallet,
 });
 
+const theme = {
+  styles: {
+    global: {
+      "*": {
+        boxSizing: "border-box",
+      },
+      button: {
+        "_active, _hover": {
+          background: "inherit",
+        },
+      },
+    },
+    initialColorMode: "dark",
+    useSystemColorMode: false,
+  },
+};
+
 const root = createRoot(document.getElementById("root"));
 window.onload = async () => {
   const isSignedIn = await wallet.startUp();
@@ -36,7 +43,7 @@ window.onload = async () => {
   window.isSignedIn = isSignedIn;
   root.render(
     <BrowserRouter>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/event" element={<Event />} />

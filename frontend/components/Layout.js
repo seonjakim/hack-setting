@@ -1,5 +1,5 @@
 import { Dispatch, Fragment, ReactNode, SetStateAction, useState } from "react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Button, ButtonGroup, Flex } from "@chakra-ui/react";
 import HamburgerIcon from "../assets/menu-white.svg";
 import BookOpenIcon from "../assets/book-open.svg";
 import GiftIcon from "../assets/gift.svg";
@@ -40,11 +40,12 @@ const MenuButton = ({
   );
 };
 
-const MenuList = ({ title = "", list = [] }) => {
+const MenuList = ({ title = "", list = [], setIsOpen }) => {
   const navigate = useNavigate();
   const listClickHandler = (link) => {
     if (link === undefined) return;
     navigate(link);
+    setIsOpen((prev) => !prev);
   };
   return (
     <Flex
@@ -92,26 +93,26 @@ const Layout = ({ children }) => {
           justifyContent="space-between"
           alignItems="center"
           backgroundColor="#fff"
+          height="60px"
           padding="0 16px"
         >
           <Button
-            padding="32px 0"
             backgroundColor="transparent"
             onClick={() => setIsOpen((prev) => !prev)}
           >
             <img src={LogoIcon} alt="logo" />
           </Button>
-          <Box>
-            <Button padding="32px 0" backgroundColor="transparent">
+          <Flex gap="8px">
+            <Button backgroundColor="transparent">
               <Image src={SearchIcon} alt="search icon" />
             </Button>
-            <Button padding="32px 0" backgroundColor="transparent">
+            <Button backgroundColor="transparent">
               <Image src={BellIcon} alt="bell icon" />
             </Button>
-          </Box>
+          </Flex>
         </Flex>
       </Box>
-      <Box padding=" 16px">{children}</Box>
+      <Box padding="0 0 100px">{children}</Box>
       <Box
         position="fixed"
         bottom="16px"
@@ -158,13 +159,15 @@ const Layout = ({ children }) => {
           backgroundColor="#fff"
           position="absolute"
           bottom="0"
+          overflow="auto"
           transitionDelay="1s"
-          borderRadius="12px"
+          borderRadius="12px 12px 0 0"
         >
           <Image
-            position="absolute"
+            display={isOpen ? "block" : "none"}
+            position="fixed"
             right="24px"
-            top="24px"
+            top="84px"
             src={CloseIcon}
             alt="close"
             onClick={() => setIsOpen(() => false)}
@@ -185,7 +188,7 @@ const Layout = ({ children }) => {
               fontSize="16px"
               fontWeight="510"
             >
-              핸들
+              @Crytotraveler
               <Image src={ChevronLeftIcon} />
             </Button>
             <Button
@@ -198,8 +201,18 @@ const Layout = ({ children }) => {
               {window.wallet.accountId}
             </Button>
           </Flex>
-          <MenuList title="활동하기" list={MENU_LIST["활동하기"]} />
-          <MenuList title="관리하기" list={MENU_LIST["관리하기"]} />
+          <Box>
+            <MenuList
+              title="활동하기"
+              list={MENU_LIST["활동하기"]}
+              setIsOpen={setIsOpen}
+            />
+            <MenuList
+              title="관리하기"
+              list={MENU_LIST["관리하기"]}
+              setIsOpen={setIsOpen}
+            />
+          </Box>
         </Box>
       </Box>
     </div>

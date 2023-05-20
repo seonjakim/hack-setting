@@ -16,12 +16,8 @@ const Gallery = () => {
         fromIndex: 0,
         limit: 10,
       })
-      .then((res) => setNftList(res));
+      .then((res) => setNftList((res || []).reverse()));
   }, []);
-  // TODO:
-  // metatransaction
-  // create account
-  // https://awesomenear.com/keypom
 
   return (
     <Layout>
@@ -33,14 +29,16 @@ const Gallery = () => {
           height="48px"
           top="60px"
           backgroundColor="#fff"
-          padding="0 20px 0 0"
+          padding="0 24px"
         >
           <Flex>
             <Button
               onClick={() => setIsOneColumnView((prev) => !prev)}
               backgroundColor="transparent"
               colorScheme="transparent"
-              padding="0 8px"
+              _active={{
+                background: "#fff",
+              }}
             >
               {isOneColumnView ? (
                 <Image src={TwoColumnListIcon} />
@@ -49,22 +47,19 @@ const Gallery = () => {
               )}
             </Button>
           </Flex>
-          <Select
-            fontSize="14px"
-            fontWeight="400"
-            width="fit-content"
-            border="none"
-          >
-            <option>최신순</option>
-          </Select>
+          <Button fontSize="14px" fontWeight="400">
+            최신순
+            <Image src={ChevronBottomIcon} />
+          </Button>
         </Flex>
       </Box>
       <Box
         display="grid"
         gap="16px"
         gridTemplateColumns={isOneColumnView ? "1fr" : "1fr 1fr"}
+        padding="0 24px"
       >
-        {nftList.reverse().map((nft) => (
+        {nftList.map((nft) => (
           <div
             key={nft.token_id}
             onClick={() => navigate(`/gallery/${nft.token_id}`)}

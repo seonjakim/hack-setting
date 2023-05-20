@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
-  const tokenId = `${window.wallet.accountId}-butter`;
+  const tokenId = `${window.wallet.accountId}-${new Date()}`;
 
   const directToGallery = async () => {
     const createdToken = await window.contract.nftToken({
@@ -23,9 +23,9 @@ const Home = () => {
   const nftMetadata = {
     token_id: tokenId,
     metadata: {
-      title: "Happy B-day Minji",
-      description: "Thank you for visiting",
-      media: cards.butter,
+      title: "POKATIKA",
+      description: "HAPPY BIRTHDAY!",
+      media: cards.minji,
     },
     receiver_id: window.wallet.accountId,
   };
@@ -45,7 +45,7 @@ const Home = () => {
         height="100vh"
       >
         <Box width="100%" filter="blur(8px)">
-          <Image width="100%" src={cards.butter} alt="Minji Birthday" />
+          <Image width="100%" src={cards.minji} alt="Minji Birthday" />
         </Box>
         <Button
           backgroundColor="#121212"
@@ -71,7 +71,7 @@ const Home = () => {
       justifyContent="center"
       height="100vh"
     >
-      <Image width="100%" src={cards.butter} alt="Minji Birthday" />
+      <Image width="100%" src={cards.minji} alt="Minji Birthday" />
       <Button
         backgroundColor="#121212"
         color="white"
