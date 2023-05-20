@@ -32,7 +32,8 @@
     ".next/types/**/*.ts",
     "near-wallet.js",
     "pages/Home.js",
-    "constants/index.js"
+    "constants/index.js",
+    "components/Layout.js"
   ],
   "exclude": ["node_modules"]
 }

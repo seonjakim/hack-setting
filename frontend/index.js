@@ -38,16 +38,7 @@ window.onload = async () => {
     <BrowserRouter>
       <ChakraProvider>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                isSignedIn={isSignedIn}
-                wallet={wallet}
-                contract={contract}
-              />
-            }
-          />
+          <Route path="/" element={<Home />} />
           <Route path="/event" element={<Event />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/gallery/:id" element={<NftDetail />} />

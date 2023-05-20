@@ -6,3 +6,33 @@ export const cards = {
   butter:
     "https://velog.velcdn.com/images/seonja/post/5ffce83d-8e4e-46e5-a857-b64d4347a73e/image.png",
 };
+
+export const MENU_LIST = {
+  활동하기: [
+    {
+      title: "이벤트",
+      link: "/event",
+    },
+    {
+      title: "내 컬렉션",
+      link: "/gallery",
+    },
+    {
+      title: "커뮤니티",
+    },
+  ],
+  관리하기: [
+    {
+      title: "신청한 이벤트",
+    },
+    {
+      title: "찜한 이벤트",
+    },
+    {
+      title: "내가 만든 이벤트",
+    },
+    {
+      title: "내가 만든 커뮤니티",
+    },
+  ],
+};
