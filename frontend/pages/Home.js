@@ -1,4 +1,3 @@
-import Layout from "../components/Layout";
 import { Button, Image, Flex, Box } from "@chakra-ui/react";
 import { cards } from "../constants/index";
 import { useNavigate } from "react-router-dom";
