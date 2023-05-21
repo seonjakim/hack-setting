@@ -1,7 +1,14 @@
 # Meet POKATIKA
 
+![](https://velog.velcdn.com/images/seonja/post/c848ffdc-b4a1-4a25-a3fd-7ae3d644f52f/image.png)
+<br>
+<br>
+
+# Structure
+
 ![](https://velog.velcdn.com/images/seonja/post/3f9ba061-58eb-4a2b-aa87-6e83dafb0447/image.png)
 
+<br>
 <br>
 
 # creat-near-app
