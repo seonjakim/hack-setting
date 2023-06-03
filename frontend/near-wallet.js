@@ -48,7 +48,7 @@ export class Wallet {
           networkId: this.network,
           signInContractId: this.createAccessKeyFor,
           trialAccountSpecs: {
-            url: "http://localhost:1234/trial-url#ACCOUNT_ID/SECRET_KEY",
+            url: "http://localhost:1234/#ACCOUNT_ID/SECRET_KEY",
             modalOptions: KEYPOM_OPTIONS,
           },
           instantSignInSpecs: {
