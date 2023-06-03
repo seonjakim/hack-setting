@@ -45,9 +45,6 @@ window.onload = async () => {
   window.contract = contract;
   window.isSignedIn = isSignedIn;
 
-  // TODO: remove console log
-  console.log(window.wallet);
-
   const queryClient = new QueryClient();
 
   root.render(
