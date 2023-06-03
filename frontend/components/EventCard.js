@@ -4,14 +4,13 @@ import BookmarkIconEmpty from "../assets/svg/bookmark_empty.svg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const EventCard = (props) => {
-  const { eventTitle, eventImage, date, address, bookmark, eventId } =
-    props.event;
+const EventCard = ({ event }) => {
+  const { eventTitle, eventImage, date, address, bookmark, eventId } = event;
   const navigate = useNavigate();
   // TODO: use server data
   const [isBookmarked, setIsBookmarked] = useState(bookmark);
 
-  if (!props.event) return;
+  if (!event) return;
 
   const onClickEventCardHandler = (id, e) => {
     if (!id && id !== 0) return;

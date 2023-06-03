@@ -2,6 +2,8 @@ import event_01 from "../assets/event/event_01.png";
 import event_02 from "../assets/event/event_02.png";
 import event_03 from "../assets/event/event_03.png";
 import event_04 from "../assets/event/event_04.png";
+import detail_01 from "../assets/event/detail_01.png";
+import detail_02 from "../assets/event/detail_02.png";
 
 export const eventMockData = [
   {
@@ -11,6 +13,9 @@ export const eventMockData = [
     date: "23.06.09(금) - 23.06.10(토)",
     address: "카페 복숭아꽃, 서울 마포구 양화로6길 99-5",
     bookmark: false,
+    detailData: {
+      desImg: [detail_01, detail_02],
+    },
   },
   {
     eventId: 1,
@@ -19,6 +24,9 @@ export const eventMockData = [
     date: "23.06.16(토) 20:00",
     address: "소극장 산울림, 서울 마포구 와우산로 157",
     bookmark: false,
+    detailData: {
+      desImg: [detail_01, detail_02],
+    },
   },
   {
     eventId: 2,
@@ -27,6 +35,9 @@ export const eventMockData = [
     date: "23.05.19(토) - 23.05.20(일)",
     address: "미노스커피, 서울 강남구 가로수길 80",
     bookmark: true,
+    detailData: {
+      desImg: [detail_01, detail_02],
+    },
   },
   {
     eventId: 3,
@@ -35,5 +46,8 @@ export const eventMockData = [
     date: "23.05.13(토)",
     address: "대전역",
     bookmark: false,
+    detailData: {
+      desImg: [detail_01, detail_02],
+    },
   },
 ];

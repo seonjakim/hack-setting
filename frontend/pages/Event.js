@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 import EventCard from "../components/EventCard";
 import { eventMockData } from "../store/mockdata";
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dropdown from "../assets/svg/dropdown.svg";
 
 const Event = () => {
@@ -85,6 +85,7 @@ const MenuTitle = styled.button`
 const FilterWrapper = styled.div`
   background-color: white;
   height: 48px;
+  width: 100vw;
   display: flex;
   padding: 0 16px;
   gap: 6px;

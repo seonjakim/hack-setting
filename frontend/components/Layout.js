@@ -79,7 +79,8 @@ const MenuList = ({ title = "", list = [], setIsOpen }) => {
   );
 };
 
-const Layout = ({ children }) => {
+const Layout = (props) => {
+  const { children, hideBottomMenu } = props;
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const isCurrentPath = (path) => {
@@ -126,46 +127,50 @@ const Layout = ({ children }) => {
       <Box padding="0 0 100px" backgroundColor={childrenBackgroundColor()}>
         {children}
       </Box>
-      <Box
-        position="fixed"
-        bottom="16px"
-        left="50%"
-        transform="translateX(-50%)"
-        backgroundColor="#224FC3"
-        height="60px"
-        width="343px"
-        borderRadius="20px"
-        display="flex"
-        justifyContent="space-between"
-        alignItems="end"
-        padding="0 24px"
-      >
-        <MenuButton
-          clickEvent={() => onClickMenuButtonHandler("/event")}
-          isOpen={isCurrentPath("event")}
-          imgSrc={GiftIcon}
-          buttonText="이벤트"
-        />
-        <MenuButton
-          clickEvent={() => onClickMenuButtonHandler("/gallery")}
-          isOpen={isCurrentPath("gallery")}
-          imgSrc={BookOpenIcon}
-          buttonText="내 컬렉션"
-        />
-        <MenuButton
-          // TODO: chage /gallery to /community after add community page
-          clickEvent={() => onClickMenuButtonHandler("/gallery")}
-          isOpen={false}
-          imgSrc={UsersWhiteIcon}
-          buttonText="커뮤니티"
-        />
-        <MenuButton
-          isOpen={isOpen}
-          imgSrc={HamburgerIcon}
-          buttonText="메뉴"
-          clickEvent={() => setIsOpen(() => true)}
-        />
-      </Box>
+      {hideBottomMenu ? (
+        <></>
+      ) : (
+        <Box
+          position="fixed"
+          bottom="16px"
+          left="50%"
+          transform="translateX(-50%)"
+          backgroundColor="#224FC3"
+          height="60px"
+          width="343px"
+          borderRadius="20px"
+          display="flex"
+          justifyContent="space-between"
+          alignItems="end"
+          padding="0 24px"
+        >
+          <MenuButton
+            clickEvent={() => onClickMenuButtonHandler("/event")}
+            isOpen={isCurrentPath("event")}
+            imgSrc={GiftIcon}
+            buttonText="이벤트"
+          />
+          <MenuButton
+            clickEvent={() => onClickMenuButtonHandler("/gallery")}
+            isOpen={isCurrentPath("gallery")}
+            imgSrc={BookOpenIcon}
+            buttonText="내 컬렉션"
+          />
+          <MenuButton
+            // TODO: chage /gallery to /community after add community page
+            clickEvent={() => onClickMenuButtonHandler("/gallery")}
+            isOpen={false}
+            imgSrc={UsersWhiteIcon}
+            buttonText="커뮤니티"
+          />
+          <MenuButton
+            isOpen={isOpen}
+            imgSrc={HamburgerIcon}
+            buttonText="메뉴"
+            clickEvent={() => setIsOpen(() => true)}
+          />
+        </Box>
+      )}
       <Box
         width="100vw"
         height="100vh"
