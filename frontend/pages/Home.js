@@ -7,12 +7,23 @@ import { useQuery } from "react-query";
 
 const Home = () => {
   const navigate = useNavigate();
-  const tokenId = `${window.wallet.accountId}-${new Date()}`;
+  const { isLoading, data, isSuccess } = useQuery({
+    queryKey: ["test1"],
+    queryFn: () =>
+      axios
+        .get("http://13.209.1.174:80/api/event/by-id/1/guest01.testnet") // 민팅전 정보 가져오기
+        .then((res) => res.data),
+    options: {
+      refetchInterval: false,
+    },
+  });
+  const tokenId = `${window.wallet.accountId}-${"1"}`;
 
   const directToGallery = async () => {
     const createdToken = await window.contract.nftToken({
       token_id: tokenId,
     });
+    console.log("success", createdToken);
     if (createdToken !== null) {
       navigate("/gallery");
     }
@@ -35,18 +46,8 @@ const Home = () => {
   const photoCardMint = async () => {
     const mintRes = await window.contract.mintNFT(nftMetadata);
     console.log("mintRes", mintRes);
+    directToGallery();
   };
-
-  const { isLoading, data, isSuccess } = useQuery({
-    queryKey: ["test1"],
-    queryFn: () =>
-      axios
-        .get("http://13.209.1.174:80/api/event/by-wallet/12345abcde") // 민팅전 정보 가져오기
-        .then((res) => res.data),
-    options: {
-      refetchInterval: false,
-    },
-  });
 
   useEffect(() => {
     console.log("isLoading", isLoading, "isSuccess", isSuccess);
