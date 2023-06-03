@@ -3,8 +3,8 @@ export const KEYPOM_OPTIONS = {
     landing: {
       title: "계정 만들기",
       body: " ",
-      fieldPlaceholder: "ID를 입력해주세요",
-      buttonText: "계정 생성하기",
+      fieldPlaceholder: "닉네임을 입력해주세요",
+      buttonText: "포토카드에 닉네임 넣기",
     },
     claiming: {
       title: "계정 만들기",
