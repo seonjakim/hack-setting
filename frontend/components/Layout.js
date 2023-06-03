@@ -78,12 +78,23 @@ const MenuList = ({ title = "", list = [], setIsOpen }) => {
     </Flex>
   );
 };
+
 const Layout = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const navigate = useNavigate();
   const isCurrentPath = (path) => {
     return window.location.pathname.indexOf(path) !== -1;
   };
+
+  const childrenBackgroundColor = () => {
+    if (isCurrentPath("event")) return "#f2f2f2";
+    return "whtie";
+  };
+
+  const onClickMenuButtonHandler = (link) => {
+    navigate(link);
+  };
+
   return (
     <div>
       <Box height="60px">
@@ -112,7 +123,9 @@ const Layout = ({ children }) => {
           </Flex>
         </Flex>
       </Box>
-      <Box padding="0 0 100px">{children}</Box>
+      <Box padding="0 0 100px" backgroundColor={childrenBackgroundColor()}>
+        {children}
+      </Box>
       <Box
         position="fixed"
         bottom="16px"
@@ -127,13 +140,21 @@ const Layout = ({ children }) => {
         alignItems="end"
         padding="0 24px"
       >
-        <MenuButton isOpen={false} imgSrc={GiftIcon} buttonText="이벤트" />
         <MenuButton
+          clickEvent={() => onClickMenuButtonHandler("/event")}
+          isOpen={isCurrentPath("event")}
+          imgSrc={GiftIcon}
+          buttonText="이벤트"
+        />
+        <MenuButton
+          clickEvent={() => onClickMenuButtonHandler("/gallery")}
           isOpen={isCurrentPath("gallery")}
           imgSrc={BookOpenIcon}
           buttonText="내 컬렉션"
         />
         <MenuButton
+          // TODO: chage /gallery to /community after add community page
+          clickEvent={() => onClickMenuButtonHandler("/gallery")}
           isOpen={false}
           imgSrc={UsersWhiteIcon}
           buttonText="커뮤니티"

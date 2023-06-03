@@ -9,6 +9,7 @@ import LocationIcon from "../assets/location.svg";
 const NftDetail = () => {
   const [nftInfo, setNftInfo] = useState(null);
   const { id } = useParams();
+
   const getNftDetail = async (tries) => {
     // error state 정의해줘야 함
     if (tries >= 2) return "Sorry for the error";
@@ -18,15 +19,19 @@ const NftDetail = () => {
     if (res === null) getNftDetail(tries++);
     setNftInfo(res);
   };
+
   useEffect(() => {
     getNftDetail(0);
   }, []);
+
   const mockData = {
     eventTitle: "new jeans debut 100 days",
     date: "23.05.25 - 23.05.31",
     address: "26, Yeongdong-daero 96-gil, Gangnam-gu, Seoul",
   };
+
   if (!nftInfo) return null;
+
   return (
     <Layout buttonText="목록으로 돌아가기">
       <Box

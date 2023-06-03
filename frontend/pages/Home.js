@@ -1,4 +1,3 @@
-import Layout from "../components/Layout";
 import { Button, Image, Flex, Box } from "@chakra-ui/react";
 import { cards } from "../constants/index";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +19,7 @@ const Home = () => {
   useEffect(() => {
     directToGallery();
   }, []);
+
   const nftMetadata = {
     token_id: tokenId,
     metadata: {
@@ -34,6 +34,7 @@ const Home = () => {
     const mintRes = await window.contract.mintNFT(nftMetadata);
     console.log("mintRes", mintRes);
   };
+
   if (!window.isSignedIn) {
     return (
       <Flex
@@ -62,6 +63,7 @@ const Home = () => {
       </Flex>
     );
   }
+
   return (
     <Flex
       flexDirection="column"

@@ -33,7 +33,8 @@
     "near-wallet.js",
     "pages/Home.js",
     "constants/index.js",
-    "components/Layout.js"
+    "components/Layout.js",
+    "pages/Event.js"
   ],
   "exclude": ["node_modules"]
 }

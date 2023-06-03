@@ -9,6 +9,7 @@ const Gallery = () => {
   const navigate = useNavigate();
   const [nftList, setNftList] = useState([]);
   const [isOneColumnView, setIsOneColumnView] = useState(false);
+
   useEffect(() => {
     window.contract
       .nftTokensForOwner({
@@ -53,6 +54,7 @@ const Gallery = () => {
           </Button>
         </Flex>
       </Box>
+
       <Box
         display="grid"
         gap="16px"
