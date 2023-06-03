@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
-  const tokenId = `${window.wallet.accountId}-1`;
+  const tokenId = `${window.wallet.accountId}-${new Date()}`;
 
   const directToGallery = async () => {
     const createdToken = await window.contract.nftToken({
@@ -19,6 +19,7 @@ const Home = () => {
   useEffect(() => {
     directToGallery();
   }, []);
+
   const nftMetadata = {
     token_id: tokenId,
     metadata: {
@@ -33,6 +34,7 @@ const Home = () => {
     const mintRes = await window.contract.mintNFT(nftMetadata);
     console.log("mintRes", mintRes);
   };
+
   if (!window.isSignedIn) {
     return (
       <Flex
@@ -61,6 +63,7 @@ const Home = () => {
       </Flex>
     );
   }
+
   return (
     <Flex
       flexDirection="column"

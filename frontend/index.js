@@ -8,6 +8,7 @@ import { Contract } from "./near-interface";
 import { Wallet } from "./near-wallet";
 import Gallery from "./pages/Gallery";
 import NftDetail from "./pages/NftDetail";
+import EventDetail from "./pages/EventDetail";
 const wallet = new Wallet({
   createAccessKeyFor: "nft_test_front.testnet",
 });
@@ -41,6 +42,10 @@ window.onload = async () => {
   window.wallet = wallet;
   window.contract = contract;
   window.isSignedIn = isSignedIn;
+
+  // TODO: remove console log
+  console.log(window.wallet, window.contract, window.isSignedIn);
+
   root.render(
     <BrowserRouter>
       <ChakraProvider theme={theme}>
@@ -49,6 +54,7 @@ window.onload = async () => {
           <Route path="/event" element={<Event />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/gallery/:id" element={<NftDetail />} />
+          <Route path="/event/:id" element={<EventDetail />} />
         </Routes>
       </ChakraProvider>
     </BrowserRouter>
