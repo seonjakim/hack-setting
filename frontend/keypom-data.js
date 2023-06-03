@@ -1,10 +1,10 @@
 export const KEYPOM_OPTIONS = {
   beginTrial: {
     landing: {
-      title: "Create an Account",
-      body: "To start, enter a username.",
-      fieldPlaceholder: "Account ID",
-      buttonText: "Create",
+      title: "닉네임만 입력하고 포토카드 받기",
+      body: " ",
+      fieldPlaceholder: "닉네임을 입력해주세요",
+      buttonText: "포토카드 받기",
     },
     claiming: {
       title: "Creating Account",
