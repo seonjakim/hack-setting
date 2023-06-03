@@ -2,6 +2,8 @@ import { Button, Image, Flex, Box } from "@chakra-ui/react";
 import { cards } from "../constants/index";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import axios from "axios";
+import { useQuery } from "react-query";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -34,6 +36,22 @@ const Home = () => {
     const mintRes = await window.contract.mintNFT(nftMetadata);
     console.log("mintRes", mintRes);
   };
+
+  const { isLoading, data, isSuccess } = useQuery({
+    queryKey: ["test1"],
+    queryFn: () =>
+      axios
+        .get("http://13.209.1.174:80/api/event/by-wallet/12345abcde") // 민팅전 정보 가져오기
+        .then((res) => res.data),
+    options: {
+      refetchInterval: false,
+    },
+  });
+
+  useEffect(() => {
+    console.log("isLoading", isLoading, "isSuccess", isSuccess);
+    console.log(data);
+  }, [isLoading, isSuccess]);
 
   if (!window.isSignedIn) {
     return (
