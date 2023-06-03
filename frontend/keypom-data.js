@@ -1,19 +1,19 @@
 export const KEYPOM_OPTIONS = {
   beginTrial: {
     landing: {
-      title: "닉네임만 입력하고 포토카드 받기",
+      title: "계정 만들기",
       body: " ",
-      fieldPlaceholder: "닉네임을 입력해주세요",
-      buttonText: "포토카드 받기",
+      fieldPlaceholder: "ID를 입력해주세요",
+      buttonText: "계정 생성하기",
     },
     claiming: {
-      title: "Creating Account",
-      body: "Your account is being created. Please wait...",
+      title: "계정 만들기",
+      body: "계정을 생성하는 중입니다.",
     },
     claimed: {
-      title: "You're all set!🎉",
-      body: "Your account has been successfully created.",
-      buttonText: "Continue to app",
+      title: "계정 생선 완료!",
+      body: "계정이 생성되었습니다.",
+      buttonText: "포토카드 받으러 가기",
     },
   },
   trialOver: {

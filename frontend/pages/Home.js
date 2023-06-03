@@ -1,22 +1,17 @@
 import { Button, Image, Flex, Box } from "@chakra-ui/react";
 import { cards } from "../constants/index";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
+import loadingAnimation from "../assets/svg/loading.svg";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { isLoading, data, isSuccess } = useQuery({
-    queryKey: ["test1"],
-    queryFn: () =>
-      axios
-        .get("http://13.209.1.174:80/api/event/by-id/1/guest01.testnet") // 민팅전 정보 가져오기
-        .then((res) => res.data),
-    options: {
-      refetchInterval: false,
-    },
-  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [cardImageUrl, setCardImageUrl] = useState(cards.minji);
+  const [keyformClicked, setKeyformClicked] = useState();
+
   const tokenId = `${window.wallet.accountId}-${"1"}`;
 
   const directToGallery = async () => {
@@ -33,28 +28,46 @@ const Home = () => {
     directToGallery();
   }, []);
 
-  const nftMetadata = {
-    token_id: tokenId,
-    metadata: {
-      title: "POKATIKA",
-      description: "HAPPY BIRTHDAY!",
-      media: cards.minji,
-    },
-    receiver_id: window.wallet.accountId,
-  };
-
   const photoCardMint = async () => {
-    const mintRes = await window.contract.mintNFT(nftMetadata);
-    console.log("mintRes", mintRes);
-    directToGallery();
-  };
+    setIsLoading(true);
+    const res = await axios.get(
+      `http://13.209.1.174:80/api/event/by-id/${1}/${window.wallet.accountId}`
+    );
 
-  useEffect(() => {
-    console.log("isLoading", isLoading, "isSuccess", isSuccess);
-    console.log(data);
-  }, [isLoading, isSuccess]);
+    console.log(res.data.data);
+
+    setCardImageUrl(
+      `https://nftstorage.link/ipfs/${res.data.data.nftImageCid}`
+    );
+
+    const nftMetadata = {
+      token_id: tokenId,
+      metadata: {
+        title: "POKATIKA",
+        description: "HAPPY BIRTHDAY!",
+        media: `https://nftstorage.link/ipfs/${res.data.data.nftImageCid}`,
+      },
+      receiver_id: window.wallet.accountId,
+    };
+
+    const result = await window.contract.mintNFT(nftMetadata);
+
+    if (result) {
+      setIsLoading(false);
+      directToGallery();
+    }
+  };
 
   if (!window.isSignedIn) {
+    const onClickKeypomHander = () => {
+      navigate(
+        "/#v2.keypom.testnet/67UgmoYdkxT9TRZHP98zUgKi6CBrT57cT3hhy3gb2o24dFjWYsEPySGr8tY5pHggvpqf5mNJNPnK1TARQoyH3mmx"
+      );
+      window.location.reload();
+      keyformClicked = true;
+      setKeyformClicked(true);
+    };
+
     return (
       <Flex
         flexDirection="column"
@@ -64,9 +77,10 @@ const Home = () => {
         justifyContent="center"
         height="100vh"
       >
-        <Box width="100%" filter="blur(8px)">
-          <Image width="100%" src={cards.minji} alt="Minji Birthday" />
+        <Box width="100%">
+          <Image width="100%" src={cardImageUrl} alt="Minji Birthday" />
         </Box>
+
         <Button
           backgroundColor="#121212"
           color="white"
@@ -75,9 +89,10 @@ const Home = () => {
           borderRadius="60px"
           fontSize="16px"
           fontWeight="700"
-          onClick={() => window.wallet.signIn()}
+          visibility={keyformClicked && "hidden"}
+          onClick={onClickKeypomHander}
         >
-          월렛 연결하기
+          계정 만들고 포토카드 받기
         </Button>
       </Flex>
     );
@@ -92,7 +107,8 @@ const Home = () => {
       justifyContent="center"
       height="100vh"
     >
-      <Image width="100%" src={cards.minji} alt="Minji Birthday" />
+      <Image width="100%" src={cardImageUrl} alt="Minji Birthday" />
+
       <Button
         backgroundColor="#121212"
         color="white"
@@ -103,7 +119,11 @@ const Home = () => {
         fontWeight="700"
         onClick={photoCardMint}
       >
-        포토카드 받기
+        {isLoading ? (
+          <img src={loadingAnimation} alt="loading" />
+        ) : (
+          "포토카드 받기"
+        )}
       </Button>
     </Flex>
   );
