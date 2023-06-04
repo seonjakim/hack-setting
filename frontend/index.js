@@ -9,6 +9,8 @@ import { Wallet } from "./near-wallet";
 import Gallery from "./pages/Gallery";
 import NftDetail from "./pages/NftDetail";
 import EventDetail from "./pages/EventDetail";
+import { QueryClient, QueryClientProvider } from "react-query";
+
 const wallet = new Wallet({
   createAccessKeyFor: "nft_test_front.testnet",
 });
@@ -43,20 +45,21 @@ window.onload = async () => {
   window.contract = contract;
   window.isSignedIn = isSignedIn;
 
-  // TODO: remove console log
-  console.log(window.wallet, window.contract, window.isSignedIn);
+  const queryClient = new QueryClient();
 
   root.render(
-    <BrowserRouter>
-      <ChakraProvider theme={theme}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/event" element={<Event />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/gallery/:id" element={<NftDetail />} />
-          <Route path="/event/:id" element={<EventDetail />} />
-        </Routes>
-      </ChakraProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <ChakraProvider theme={theme}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/event" element={<Event />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery/:id" element={<NftDetail />} />
+            <Route path="/event/:id" element={<EventDetail />} />
+          </Routes>
+        </ChakraProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 };
