@@ -6,7 +6,7 @@
 
 # Structure
 
-![](https://velog.velcdn.com/images/seonja/post/3f9ba061-58eb-4a2b-aa87-6e83dafb0447/image.png)
+![](https://velog.velcdn.com/images/seonja/post/04e2cb25-4c0e-4634-95b9-4f4528ae96f7/image.png)
 
 <br>
 <br>
