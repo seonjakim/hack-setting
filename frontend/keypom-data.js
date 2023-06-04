@@ -11,7 +11,7 @@ export const KEYPOM_OPTIONS = {
       body: "계정을 생성하는 중입니다.",
     },
     claimed: {
-      title: "계정 생선 완료!",
+      title: "계정 생성 완료!",
       body: "계정이 생성되었습니다.",
       buttonText: "포토카드 받으러 가기",
     },

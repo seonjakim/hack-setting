@@ -43,7 +43,6 @@ export class Contract {
         token_id,
       },
     });
-    console.log(tokenId);
     return tokenId;
   }
   async nftTokensForOwner({ accountId, fromIndex, limit }) {
@@ -56,7 +55,6 @@ export class Contract {
         limit,
       },
     });
-    console.log("tokens", nftTokens);
     return nftTokens;
   }
 

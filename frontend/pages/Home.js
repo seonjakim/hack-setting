@@ -1,9 +1,8 @@
 import { Button, Image, Flex, Box } from "@chakra-ui/react";
 import { cards } from "../constants/index";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useQuery } from "react-query";
 import loadingAnimation from "../assets/svg/loading.svg";
 
 const Home = () => {
@@ -11,47 +10,59 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardImageUrl, setCardImageUrl] = useState(cards.minji);
   const [keyformClicked, setKeyformClicked] = useState();
-
-  const tokenId = `${window.wallet.accountId}-${"1"}`;
+  const [eventInfo, setEventInfo] = useState(null);
+  const tokenId = eventInfo
+    ? `${eventInfo.eventTitle}#${window.wallet.accountId}`
+    : `${window.wallet.accountId}-${"1"}`;
 
   const directToGallery = async () => {
     const createdToken = await window.contract.nftToken({
       token_id: tokenId,
     });
-    console.log("success", createdToken);
     if (createdToken !== null) {
       navigate("/gallery");
     }
   };
 
+  const getEventApiHandler = async () => {
+    setIsLoading(true);
+
+    try {
+      const res = await axios.get(
+        `http://13.209.1.174:80/api/event/by-id/1/${window.wallet.accountId}`
+      );
+      if (res.status === 200) {
+        setEventInfo(res.data.data);
+        setCardImageUrl(
+          `https://nftstorage.link/ipfs/${res.data.data.nftImageCid}`
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    setIsLoading(false);
+  };
+  useEffect(() => {
+    getEventApiHandler();
+  }, []);
   useEffect(() => {
     directToGallery();
-  }, []);
+  }, [eventInfo]);
 
   const photoCardMint = async () => {
     setIsLoading(true);
-    const res = await axios.get(
-      `http://13.209.1.174:80/api/event/by-id/${1}/${window.wallet.accountId}`
-    );
-
-    console.log(res.data.data);
-
-    setCardImageUrl(
-      `https://nftstorage.link/ipfs/${res.data.data.nftImageCid}`
-    );
-
     const nftMetadata = {
       token_id: tokenId,
       metadata: {
-        title: "POKATIKA",
+        title: `${eventInfo.eventTitle}#${eventInfo.count}`,
         description: "HAPPY BIRTHDAY!",
-        media: `https://nftstorage.link/ipfs/${res.data.data.nftImageCid}`,
+        media: `https://nftstorage.link/ipfs/${eventInfo.nftImageCid}`,
       },
       receiver_id: window.wallet.accountId,
     };
 
     const result = await window.contract.mintNFT(nftMetadata);
-
+    console.log("NFT result", result);
     if (result) {
       setIsLoading(false);
       directToGallery();
@@ -118,6 +129,7 @@ const Home = () => {
         fontSize="16px"
         fontWeight="700"
         onClick={photoCardMint}
+        isDisabled={isLoading}
       >
         {isLoading ? (
           <img src={loadingAnimation} alt="loading" />
