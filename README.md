@@ -11,12 +11,19 @@
 <br>
 <br>
 
-# creat-near-app
+# Technologies Used
 
-## > NEAR JavaScript SDK
+List the technologies you utilized in your project, including the programming languages, frameworks, libraries, and any other tools. Based on your description, you can include the following:
 
-You can write smart-contracts in JavaScript or Typescript, and our SDK will pack them with a lightweight runtime.
+- Near SDK JS
+- React
+- near-api-js
+- Java
+- Spring
 
-## > NEAR JavaScript API
+# Getting Started
 
-near-api-js is a complete library to interact with the NEAR blockchain. You can use it in the browser, or in Node.js runtime.
+1. Clone the repository: git clone https://github.com/pokatika/pokatika-frontend.git
+2. Install the necessary dependencies by running yarn or npm install in both the root directory and the frontend folder.
+3. Configure any environment variables or settings required for your project.
+4. Start the frontend development server by running yarn start or npm start in the frontend folder.
