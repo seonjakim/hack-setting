@@ -113,7 +113,7 @@
   opacity: 0;
   visibility: hidden;
   color: var(--wallet-selector-text-color, var(--text-color));
-  z-index: 80;
+  z-index: 100;
   justify-content: center;
   align-items: center;
   font-family: Manrope, sans-serif;

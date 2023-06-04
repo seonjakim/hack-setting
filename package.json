@@ -19,5 +19,8 @@
     "eslint-plugin-react": "^7.32.2",
     "near-cli": "^3.3.0",
     "prettier": "2.8.8"
+  },
+  "dependencies": {
+    "react-query": "^3.39.3"
   }
 }

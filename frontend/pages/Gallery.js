@@ -9,14 +9,17 @@ const Gallery = () => {
   const navigate = useNavigate();
   const [nftList, setNftList] = useState([]);
   const [isOneColumnView, setIsOneColumnView] = useState(false);
+
+  const getTokensApiHandler = async () => {
+    const res = await window.contract.nftTokensForOwner({
+      accountId: window.wallet.accountId,
+      fromIndex: 0,
+      limit: 10,
+    });
+    setNftList(res);
+  };
   useEffect(() => {
-    window.contract
-      .nftTokensForOwner({
-        accountId: window.wallet.accountId,
-        fromIndex: 0,
-        limit: 10,
-      })
-      .then((res) => setNftList((res || []).reverse()));
+    getTokensApiHandler();
   }, []);
 
   return (
@@ -53,6 +56,7 @@ const Gallery = () => {
           </Button>
         </Flex>
       </Box>
+
       <Box
         display="grid"
         gap="16px"

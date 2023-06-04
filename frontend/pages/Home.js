@@ -1,11 +1,19 @@
 import { Button, Image, Flex, Box } from "@chakra-ui/react";
 import { cards } from "../constants/index";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import loadingAnimation from "../assets/svg/loading.svg";
 
 const Home = () => {
   const navigate = useNavigate();
-  const tokenId = `${window.wallet.accountId}-1`;
+  const [isLoading, setIsLoading] = useState(false);
+  const [cardImageUrl, setCardImageUrl] = useState(cards.minji);
+  const [keyformClicked, setKeyformClicked] = useState();
+  const [eventInfo, setEventInfo] = useState(null);
+  const tokenId = eventInfo
+    ? `${eventInfo.eventTitle}#${window.wallet.accountId}`
+    : `${window.wallet.accountId}-${"1"}`;
 
   const directToGallery = async () => {
     const createdToken = await window.contract.nftToken({
@@ -16,24 +24,61 @@ const Home = () => {
     }
   };
 
+  const getEventApiHandler = async () => {
+    setIsLoading(true);
+
+    try {
+      const res = await axios.get(
+        `http://13.209.1.174:80/api/event/by-id/1/${window.wallet.accountId}`
+      );
+      if (res.status === 200) {
+        setEventInfo(res.data.data);
+        setCardImageUrl(
+          `https://nftstorage.link/ipfs/${res.data.data.nftImageCid}`
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    setIsLoading(false);
+  };
+  useEffect(() => {
+    getEventApiHandler();
+  }, []);
   useEffect(() => {
     directToGallery();
-  }, []);
-  const nftMetadata = {
-    token_id: tokenId,
-    metadata: {
-      title: "POKATIKA",
-      description: "HAPPY BIRTHDAY!",
-      media: cards.minji,
-    },
-    receiver_id: window.wallet.accountId,
-  };
+  }, [eventInfo]);
 
   const photoCardMint = async () => {
-    const mintRes = await window.contract.mintNFT(nftMetadata);
-    console.log("mintRes", mintRes);
+    setIsLoading(true);
+    const nftMetadata = {
+      token_id: tokenId,
+      metadata: {
+        title: `${eventInfo.eventTitle}#${eventInfo.count}`,
+        description: "HAPPY BIRTHDAY!",
+        media: `https://nftstorage.link/ipfs/${eventInfo.nftImageCid}`,
+      },
+      receiver_id: window.wallet.accountId,
+    };
+
+    const result = await window.contract.mintNFT(nftMetadata);
+    console.log("NFT result", result);
+    if (result) {
+      setIsLoading(false);
+      directToGallery();
+    }
   };
+
   if (!window.isSignedIn) {
+    const onClickKeypomHander = () => {
+      navigate(
+        "/#v2.keypom.testnet/67UgmoYdkxT9TRZHP98zUgKi6CBrT57cT3hhy3gb2o24dFjWYsEPySGr8tY5pHggvpqf5mNJNPnK1TARQoyH3mmx"
+      );
+      window.location.reload();
+      keyformClicked = true;
+      setKeyformClicked(true);
+    };
+
     return (
       <Flex
         flexDirection="column"
@@ -43,9 +88,10 @@ const Home = () => {
         justifyContent="center"
         height="100vh"
       >
-        <Box width="100%" filter="blur(8px)">
-          <Image width="100%" src={cards.minji} alt="Minji Birthday" />
+        <Box width="100%">
+          <Image width="100%" src={cardImageUrl} alt="Minji Birthday" />
         </Box>
+
         <Button
           backgroundColor="#121212"
           color="white"
@@ -54,13 +100,15 @@ const Home = () => {
           borderRadius="60px"
           fontSize="16px"
           fontWeight="700"
-          onClick={() => window.wallet.signIn()}
+          visibility={keyformClicked && "hidden"}
+          onClick={onClickKeypomHander}
         >
-          월렛 연결하기
+          계정 만들고 포토카드 받기
         </Button>
       </Flex>
     );
   }
+
   return (
     <Flex
       flexDirection="column"
@@ -70,7 +118,8 @@ const Home = () => {
       justifyContent="center"
       height="100vh"
     >
-      <Image width="100%" src={cards.minji} alt="Minji Birthday" />
+      <Image width="100%" src={cardImageUrl} alt="Minji Birthday" />
+
       <Button
         backgroundColor="#121212"
         color="white"
@@ -80,8 +129,13 @@ const Home = () => {
         fontSize="16px"
         fontWeight="700"
         onClick={photoCardMint}
+        isDisabled={isLoading}
       >
-        포토카드 받기
+        {isLoading ? (
+          <img src={loadingAnimation} alt="loading" />
+        ) : (
+          "포토카드 받기"
+        )}
       </Button>
     </Flex>
   );

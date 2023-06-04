@@ -1,6 +1,7 @@
+import minji from "../assets/minji.png";
+
 export const cards = {
-  minji:
-    "https://velog.velcdn.com/images/seonja/post/10ec4bc8-ffe7-4dd6-b355-e990a38d69e7/image.png",
+  minji: minji,
   delight:
     "https://velog.velcdn.com/images/seonja/post/a6cdce46-29b2-4344-b0d8-2b7a1e5bdbcb/image.png",
   butter:
