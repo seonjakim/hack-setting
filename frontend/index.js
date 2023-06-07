@@ -10,6 +10,7 @@ import Gallery from "./pages/Gallery";
 import NftDetail from "./pages/NftDetail";
 import EventDetail from "./pages/EventDetail";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Init from "./pages/Init";
 
 const wallet = new Wallet({
   createAccessKeyFor: "nft_test_front.testnet",
@@ -52,6 +53,7 @@ window.onload = async () => {
       <BrowserRouter>
         <ChakraProvider theme={theme}>
           <Routes>
+            <Route path="/init" element={<Init />} />
             <Route path="/" element={<Home />} />
             <Route path="/event" element={<Event />} />
             <Route path="/gallery" element={<Gallery />} />
