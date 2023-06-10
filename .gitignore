@@ -7,7 +7,7 @@ node_modules
 
 # build
 /out
-/dist
+**/dist
 
 # keys
 /templates/react/neardev
@@ -16,7 +16,7 @@ node_modules
 /coverage
 
 # production
-/build
+**/build
 
 # misc
 .DS_Store
@@ -33,3 +33,6 @@ yarn-error.log*
 **/neardev
 **/build
 **/.parcel-cache
+
+yarn.lock
+package-lock.json
