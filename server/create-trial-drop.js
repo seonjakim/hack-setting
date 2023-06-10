@@ -63,7 +63,7 @@ async function createTrialAccount() {
     trialEndFloorNEAR: 1.25,
   });
 
-  const guestBookInstance = "http://52.53.205.89/#";
+  const guestBookInstance = "http://43.200.173.84/#";
   const keypomContractId = "v2.keypom.testnet";
   const delimiter = "/";
   const secretKey = keys.secretKeys[0];

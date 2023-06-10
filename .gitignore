@@ -7,7 +7,7 @@ node_modules
 
 # build
 /out
-**/dist
+/dist
 
 # keys
 /templates/react/neardev
